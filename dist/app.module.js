@@ -10,6 +10,10 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const users_module_1 = require("./users/users.module");
 const sequelize_1 = require("@nestjs/sequelize");
+const auths_module_1 = require("./auths/auths.module");
+const shared_module_1 = require("./common/shared.module");
+const artists_module_1 = require("./artists/artists.module");
+const albums_module_1 = require("./albums/albums.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -25,7 +29,8 @@ exports.AppModule = AppModule = __decorate([
                 port: 5432,
                 autoLoadModels: true,
                 synchronize: true,
-            })
+            }),
+            auths_module_1.AuthsModule, shared_module_1.SharedModule, artists_module_1.ArtistsModule, albums_module_1.AlbumsModule
         ],
         controllers: [],
         providers: [],
