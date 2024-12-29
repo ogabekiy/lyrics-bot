@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Song } from "src/songs/song.model";
 
 @Table({tableName:'users'})
 export class User extends Model<User>{
@@ -39,4 +40,7 @@ export class User extends Model<User>{
         defaultValue: 'https://openclipart.org/image/800px/247320'
     })
     profile_image: string;
+
+    @HasMany(() => Song)
+    songs: Song[]
 }

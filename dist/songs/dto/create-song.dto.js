@@ -9,29 +9,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateAlbumDto = void 0;
+exports.CreateSongDto = void 0;
 const class_validator_1 = require("class-validator");
-class CreateAlbumDto {
+class CreateSongDto {
 }
-exports.CreateAlbumDto = CreateAlbumDto;
+exports.CreateSongDto = CreateSongDto;
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateAlbumDto.prototype, "title", void 0);
-__decorate([
-    (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
-], CreateAlbumDto.prototype, "artist_id", void 0);
+], CreateSongDto.prototype, "title", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateAlbumDto.prototype, "album_cover", void 0);
+], CreateSongDto.prototype, "lyrics", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], CreateSongDto.prototype, "song_cover", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateAlbumDto.prototype, "song_quantity", void 0);
-//# sourceMappingURL=create-album.dto.js.map
+], CreateSongDto.prototype, "artist_id", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], CreateSongDto.prototype, "album_id", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], CreateSongDto.prototype, "added_by", void 0);
+//# sourceMappingURL=create-song.dto.js.map

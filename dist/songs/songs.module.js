@@ -6,20 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AlbumsModule = void 0;
+exports.SongsModule = void 0;
 const common_1 = require("@nestjs/common");
-const albums_service_1 = require("./albums.service");
-const albums_controller_1 = require("./albums.controller");
+const songs_service_1 = require("./songs.service");
+const songs_controller_1 = require("./songs.controller");
 const sequelize_1 = require("@nestjs/sequelize");
-const album_model_1 = require("./album.model");
-let AlbumsModule = class AlbumsModule {
+const song_model_1 = require("./song.model");
+let SongsModule = class SongsModule {
 };
-exports.AlbumsModule = AlbumsModule;
-exports.AlbumsModule = AlbumsModule = __decorate([
+exports.SongsModule = SongsModule;
+exports.SongsModule = SongsModule = __decorate([
     (0, common_1.Module)({
-        imports: [sequelize_1.SequelizeModule.forFeature([album_model_1.Album])],
-        controllers: [albums_controller_1.AlbumsController],
-        providers: [albums_service_1.AlbumsService],
+        imports: [sequelize_1.SequelizeModule.forFeature([song_model_1.Song])],
+        controllers: [songs_controller_1.SongsController],
+        providers: [songs_service_1.SongsService],
     })
-], AlbumsModule);
-//# sourceMappingURL=albums.module.js.map
+], SongsModule);
+//# sourceMappingURL=songs.module.js.map

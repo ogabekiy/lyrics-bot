@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Album = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
+const artist_model_1 = require("../artists/artist.model");
+const song_model_1 = require("../songs/song.model");
 let Album = class Album extends sequelize_typescript_1.Model {
 };
 exports.Album = Album;
@@ -21,6 +23,36 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], Album.prototype, "title", void 0);
+__decorate([
+    (0, sequelize_typescript_1.ForeignKey)(() => artist_model_1.Artist),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: false
+    }),
+    __metadata("design:type", Number)
+], Album.prototype, "artist_id", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING,
+        allowNull: false
+    }),
+    __metadata("design:type", String)
+], Album.prototype, "album_cover", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: false
+    }),
+    __metadata("design:type", Number)
+], Album.prototype, "song_quantity", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsTo)(() => artist_model_1.Artist),
+    __metadata("design:type", artist_model_1.Artist)
+], Album.prototype, "artist", void 0);
+__decorate([
+    (0, sequelize_typescript_1.HasMany)(() => song_model_1.Song),
+    __metadata("design:type", Array)
+], Album.prototype, "songs", void 0);
 exports.Album = Album = __decorate([
     (0, sequelize_typescript_1.Table)({ tableName: 'albums' })
 ], Album);

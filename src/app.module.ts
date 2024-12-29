@@ -5,6 +5,7 @@ import { AuthsModule } from './auths/auths.module';
 import { SharedModule } from './common/shared.module';
 import { ArtistsModule } from './artists/artists.module';
 import { AlbumsModule } from './albums/albums.module';
+import { SongsModule } from './songs/songs.module';
 @Module({
   imports: [UsersModule,
     SequelizeModule.forRoot({
@@ -17,7 +18,7 @@ import { AlbumsModule } from './albums/albums.module';
       autoLoadModels: true,
       synchronize: true,
     }),
-    AuthsModule,SharedModule, ArtistsModule, AlbumsModule
+    AuthsModule,SharedModule, ArtistsModule, AlbumsModule, SongsModule
   ],
   controllers: [],
   providers: [],

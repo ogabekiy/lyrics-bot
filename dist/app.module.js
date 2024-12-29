@@ -14,6 +14,7 @@ const auths_module_1 = require("./auths/auths.module");
 const shared_module_1 = require("./common/shared.module");
 const artists_module_1 = require("./artists/artists.module");
 const albums_module_1 = require("./albums/albums.module");
+const songs_module_1 = require("./songs/songs.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -30,7 +31,7 @@ exports.AppModule = AppModule = __decorate([
                 autoLoadModels: true,
                 synchronize: true,
             }),
-            auths_module_1.AuthsModule, shared_module_1.SharedModule, artists_module_1.ArtistsModule, albums_module_1.AlbumsModule
+            auths_module_1.AuthsModule, shared_module_1.SharedModule, artists_module_1.ArtistsModule, albums_module_1.AlbumsModule, songs_module_1.SongsModule
         ],
         controllers: [],
         providers: [],

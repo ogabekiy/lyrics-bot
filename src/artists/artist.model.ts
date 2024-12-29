@@ -1,4 +1,6 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Album } from "src/albums/album.model";
+import { Song } from "src/songs/song.model";
 
 @Table({tableName: 'artist'})
 export class Artist extends Model<Artist>{
@@ -15,4 +17,10 @@ export class Artist extends Model<Artist>{
     })
     artist_photo : string
     
+
+    @HasMany(() => Album)
+    albums: Album[]
+
+    @HasMany(() => Song)
+    songs: Song[]
 }

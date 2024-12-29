@@ -12,42 +12,40 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AlbumsService = void 0;
+exports.SongsService = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
-const album_model_1 = require("./album.model");
-let AlbumsService = class AlbumsService {
-    constructor(AlbumModel) {
-        this.AlbumModel = AlbumModel;
+const song_model_1 = require("./song.model");
+const artist_model_1 = require("../artists/artist.model");
+let SongsService = class SongsService {
+    constructor(SongModel) {
+        this.SongModel = SongModel;
     }
-    async create(createAlbumDto) {
-        return await this.AlbumModel.create(createAlbumDto);
+    async create(createSongDto) {
+        return await this.SongModel.create(createSongDto);
     }
     async findAll() {
-        return await this.AlbumModel.findAll();
+        const data = await this.SongModel.findAll({
+            include: [
+                { model: artist_model_1.Artist }
+            ]
+        });
+        return `This action returns all songs`;
     }
-    async findOne(id) {
-        return await this.AlbumModel.findOne({ where: { id } });
+    findOne(id) {
+        return `This action returns a #${id} song`;
     }
-    async update(id, updateAlbumDto) {
-        const data = await this.findOne(id);
-        if (!data) {
-            throw new common_1.NotFoundException('Album not found (');
-        }
-        return await this.AlbumModel.update(updateAlbumDto, { where: { id } });
+    update(id, updateSongDto) {
+        return `This action updates a #${id} song`;
     }
-    async remove(id) {
-        const data = await this.findOne(id);
-        if (!data) {
-            throw new common_1.NotFoundException('Album not found (');
-        }
-        return this.AlbumModel.destroy({ where: { id } });
+    remove(id) {
+        return `This action removes a #${id} song`;
     }
 };
-exports.AlbumsService = AlbumsService;
-exports.AlbumsService = AlbumsService = __decorate([
+exports.SongsService = SongsService;
+exports.SongsService = SongsService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, sequelize_1.InjectModel)(album_model_1.Album)),
+    __param(0, (0, sequelize_1.InjectModel)(song_model_1.Song)),
     __metadata("design:paramtypes", [Object])
-], AlbumsService);
-//# sourceMappingURL=albums.service.js.map
+], SongsService);
+//# sourceMappingURL=songs.service.js.map
