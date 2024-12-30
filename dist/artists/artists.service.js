@@ -16,6 +16,7 @@ exports.ArtistsService = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const artist_model_1 = require("./artist.model");
+const album_model_1 = require("../albums/album.model");
 let ArtistsService = class ArtistsService {
     constructor(ArtistModel) {
         this.ArtistModel = ArtistModel;
@@ -27,14 +28,15 @@ let ArtistsService = class ArtistsService {
         return await this.ArtistModel.findAll();
     }
     async findOne(id) {
-        return await this.ArtistModel.findOne({ where: { id: id } });
+        return await this.ArtistModel.findOne({ where: { id }, include: [{ model: album_model_1.Album, attributes: ['title'] }] });
     }
     async update(id, updateArtistDto) {
         const data = await this.findOne(id);
+        console.log('artist', data);
         if (!data) {
             throw new common_1.NotFoundException('Artist not found ');
         }
-        return await this.ArtistModel.update(updateArtistDto, { where: { where: { id: id } } });
+        return await this.ArtistModel.update(updateArtistDto, { where: { id: id } });
     }
     async remove(id) {
         const data = await this.findOne(id);

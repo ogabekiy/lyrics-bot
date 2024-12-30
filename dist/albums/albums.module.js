@@ -12,12 +12,13 @@ const albums_service_1 = require("./albums.service");
 const albums_controller_1 = require("./albums.controller");
 const sequelize_1 = require("@nestjs/sequelize");
 const album_model_1 = require("./album.model");
+const artist_model_1 = require("../artists/artist.model");
 let AlbumsModule = class AlbumsModule {
 };
 exports.AlbumsModule = AlbumsModule;
 exports.AlbumsModule = AlbumsModule = __decorate([
     (0, common_1.Module)({
-        imports: [sequelize_1.SequelizeModule.forFeature([album_model_1.Album])],
+        imports: [sequelize_1.SequelizeModule.forFeature([album_model_1.Album, artist_model_1.Artist])],
         controllers: [albums_controller_1.AlbumsController],
         providers: [albums_service_1.AlbumsService],
     })

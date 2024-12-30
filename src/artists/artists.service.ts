@@ -3,6 +3,7 @@ import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Artist } from './artist.model';
+import { Album } from 'src/albums/album.model';
 
 @Injectable()
 export class ArtistsService {
@@ -17,16 +18,18 @@ export class ArtistsService {
   }
 
   async findOne(id: number) {
-    return await this.ArtistModel.findOne({where:{id:id}});
+    return await this.ArtistModel.findOne({where:{id},include: [{model:Album,attributes:['title']}]});
   }
 
   async update(id: number, updateArtistDto: UpdateArtistDto) {
     const data = await this.findOne(id)
+    console.log('artist',data);
+    
     if(!data){
       throw new NotFoundException('Artist not found ')
     }
     
-    return await this.ArtistModel.update(updateArtistDto,{where :{where :{id:id}}})
+    return await this.ArtistModel.update(updateArtistDto,{where :{id:id}})
   }
 
   async remove(id: number) {

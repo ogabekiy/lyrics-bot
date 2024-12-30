@@ -16,11 +16,17 @@ exports.AlbumsService = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const album_model_1 = require("./album.model");
+const artist_model_1 = require("../artists/artist.model");
 let AlbumsService = class AlbumsService {
-    constructor(AlbumModel) {
+    constructor(AlbumModel, ArtistModel) {
         this.AlbumModel = AlbumModel;
+        this.ArtistModel = ArtistModel;
     }
     async create(createAlbumDto) {
+        const artist = await this.ArtistModel.findOne({ where: { id: createAlbumDto.artist_id } });
+        if (!artist) {
+            throw new common_1.NotFoundException('Artist not found');
+        }
         return await this.AlbumModel.create(createAlbumDto);
     }
     async findAll() {
@@ -48,6 +54,7 @@ exports.AlbumsService = AlbumsService;
 exports.AlbumsService = AlbumsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, sequelize_1.InjectModel)(album_model_1.Album)),
-    __metadata("design:paramtypes", [Object])
+    __param(1, (0, sequelize_1.InjectModel)(artist_model_1.Artist)),
+    __metadata("design:paramtypes", [Object, Object])
 ], AlbumsService);
 //# sourceMappingURL=albums.service.js.map

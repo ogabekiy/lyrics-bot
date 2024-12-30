@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSongDto } from './dto/create-song.dto';
 import { UpdateSongDto } from './dto/update-song.dto';
 import { InjectModel } from '@nestjs/sequelize';
@@ -22,15 +22,23 @@ export class SongsService {
     return `This action returns all songs`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} song`;
+  async findOne(id: number) {
+    return await this.SongModel.findOne({where:{id}});
   }
 
-  update(id: number, updateSongDto: UpdateSongDto) {
-    return `This action updates a #${id} song`;
+  async update(id: number, updateSongDto: UpdateSongDto) {
+    const data = await this.findOne(id)
+    if(!data){
+      throw new NotFoundException('Song not found')
+    }
+    return await this.SongModel.update(updateSongDto,{where:{id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} song`;
+  async remove(id: number) {
+    const data = await this.findOne(id)
+    if(!data){
+      throw new NotFoundException('Song not found')
+    }
+    return await this.SongModel.destroy({where:{id}});
   }
 }

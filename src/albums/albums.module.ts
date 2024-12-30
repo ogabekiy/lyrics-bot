@@ -3,9 +3,10 @@ import { AlbumsService } from './albums.service';
 import { AlbumsController } from './albums.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Album } from './album.model';
+import { Artist } from 'src/artists/artist.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Album])],
+  imports: [SequelizeModule.forFeature([Album,Artist])],
   controllers: [AlbumsController],
   providers: [AlbumsService],
 })

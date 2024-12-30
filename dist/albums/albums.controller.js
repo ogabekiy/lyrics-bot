@@ -39,14 +39,14 @@ let AlbumsController = class AlbumsController {
 };
 exports.AlbumsController = AlbumsController;
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_album_dto_1.CreateAlbumDto]),
     __metadata("design:returntype", void 0)
 ], AlbumsController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('all'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
@@ -59,7 +59,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AlbumsController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
+    (0, common_1.Patch)('update/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -67,7 +67,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AlbumsController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
+    (0, common_1.Delete)('delete/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

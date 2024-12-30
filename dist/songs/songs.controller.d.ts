@@ -6,7 +6,7 @@ export declare class SongsController {
     constructor(songsService: SongsService);
     create(createSongDto: CreateSongDto): Promise<import("./song.model").Song>;
     findAll(): Promise<string>;
-    findOne(id: string): string;
-    update(id: string, updateSongDto: UpdateSongDto): string;
-    remove(id: string): string;
+    findOne(id: string): Promise<import("./song.model").Song>;
+    update(id: string, updateSongDto: UpdateSongDto): Promise<[affectedCount: number]>;
+    remove(id: string): Promise<number>;
 }
