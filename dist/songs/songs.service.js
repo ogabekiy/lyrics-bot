@@ -16,7 +16,6 @@ exports.SongsService = void 0;
 const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const song_model_1 = require("./song.model");
-const artist_model_1 = require("../artists/artist.model");
 let SongsService = class SongsService {
     constructor(SongModel) {
         this.SongModel = SongModel;
@@ -25,12 +24,8 @@ let SongsService = class SongsService {
         return await this.SongModel.create(createSongDto);
     }
     async findAll() {
-        const data = await this.SongModel.findAll({
-            include: [
-                { model: artist_model_1.Artist }
-            ]
-        });
-        return `This action returns all songs`;
+        const data = await this.SongModel.findAll({});
+        return data;
     }
     async findOne(id) {
         return await this.SongModel.findOne({ where: { id } });

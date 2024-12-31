@@ -5,7 +5,7 @@ export declare class SongsService {
     private SongModel;
     constructor(SongModel: typeof Song);
     create(createSongDto: CreateSongDto): Promise<Song>;
-    findAll(): Promise<string>;
+    findAll(): Promise<Song[]>;
     findOne(id: number): Promise<Song>;
     update(id: number, updateSongDto: UpdateSongDto): Promise<[affectedCount: number]>;
     remove(id: number): Promise<number>;

@@ -18,7 +18,7 @@ export class ArtistsService {
   }
 
   async findOne(id: number) {
-    return await this.ArtistModel.findOne({where:{id},include: [{model:Album,attributes:['title']}]});
+    return await this.ArtistModel.findOne({where:{id},include: [{model:Album,attributes:['title']},{model: Album,attributes: ['title']}]});
   }
 
   async update(id: number, updateArtistDto: UpdateArtistDto) {

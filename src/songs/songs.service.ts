@@ -3,7 +3,6 @@ import { CreateSongDto } from './dto/create-song.dto';
 import { UpdateSongDto } from './dto/update-song.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Song } from './song.model';
-import { Artist } from 'src/artists/artist.model';
 
 @Injectable()
 export class SongsService {
@@ -14,12 +13,8 @@ export class SongsService {
   }
 
   async findAll() {
-    const data = await this.SongModel.findAll({
-      include: [
-        {model: Artist}
-      ]
-    })
-    return `This action returns all songs`;
+    const data = await this.SongModel.findAll({})
+    return data;
   }
 
   async findOne(id: number) {

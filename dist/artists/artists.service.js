@@ -28,7 +28,7 @@ let ArtistsService = class ArtistsService {
         return await this.ArtistModel.findAll();
     }
     async findOne(id) {
-        return await this.ArtistModel.findOne({ where: { id }, include: [{ model: album_model_1.Album, attributes: ['title'] }] });
+        return await this.ArtistModel.findOne({ where: { id }, include: [{ model: album_model_1.Album, attributes: ['title'] }, { model: album_model_1.Album, attributes: ['title'] }] });
     }
     async update(id, updateArtistDto) {
         const data = await this.findOne(id);
