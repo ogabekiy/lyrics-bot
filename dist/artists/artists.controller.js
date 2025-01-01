@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const artists_service_1 = require("./artists.service");
 const create_artist_dto_1 = require("./dto/create-artist.dto");
 const update_artist_dto_1 = require("./dto/update-artist.dto");
+const roleGuard_1 = require("../common/guards/roleGuard");
+const roles_decorator_1 = require("../common/guards/roles.decorator");
 let ArtistsController = class ArtistsController {
     constructor(artistsService) {
         this.artistsService = artistsService;
@@ -39,6 +41,8 @@ let ArtistsController = class ArtistsController {
 };
 exports.ArtistsController = ArtistsController;
 __decorate([
+    (0, common_1.UseGuards)(roleGuard_1.RoleGuard),
+    (0, roles_decorator_1.Roles)('admin'),
     (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -59,6 +63,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ArtistsController.prototype, "findOne", null);
 __decorate([
+    (0, common_1.UseGuards)(roleGuard_1.RoleGuard),
+    (0, roles_decorator_1.Roles)('admin'),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -67,6 +73,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ArtistsController.prototype, "update", null);
 __decorate([
+    (0, common_1.UseGuards)(roleGuard_1.RoleGuard),
+    (0, roles_decorator_1.Roles)('admin'),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

@@ -10,8 +10,17 @@ export class UsersService {
   constructor(@InjectModel(User) private UserModel: typeof User) {}
 
   async create(createUserDto: CreateUserDto) {
-    console.log('xa');
+    // console.log('xa');
     
+    const data = await this.findUserByEmail(createUserDto.email);
+    if(data){
+      throw new ConflictException("Email already exists");
+    }
+    createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
+    return await this.UserModel.create(createUserDto);
+  }
+
+  async createAdmin(createUserDto: CreateUserDto){
     const data = await this.findUserByEmail(createUserDto.email);
     if(data){
       throw new ConflictException("Email already exists");

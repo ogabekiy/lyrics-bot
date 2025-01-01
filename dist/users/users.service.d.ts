@@ -5,6 +5,7 @@ export declare class UsersService {
     private UserModel;
     constructor(UserModel: typeof User);
     create(createUserDto: CreateUserDto): Promise<User>;
+    createAdmin(createUserDto: CreateUserDto): Promise<User>;
     findAll(): Promise<User[]>;
     findOne(id: number): Promise<User>;
     findUserByEmail(email: string): Promise<User>;

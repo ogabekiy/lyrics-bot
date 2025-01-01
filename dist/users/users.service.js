@@ -23,7 +23,14 @@ let UsersService = class UsersService {
         this.UserModel = UserModel;
     }
     async create(createUserDto) {
-        console.log('xa');
+        const data = await this.findUserByEmail(createUserDto.email);
+        if (data) {
+            throw new common_1.ConflictException("Email already exists");
+        }
+        createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
+        return await this.UserModel.create(createUserDto);
+    }
+    async createAdmin(createUserDto) {
         const data = await this.findUserByEmail(createUserDto.email);
         if (data) {
             throw new common_1.ConflictException("Email already exists");

@@ -28,11 +28,16 @@ export class SongsController {
     return this.songsService.findOne(+id);
   }
 
+
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSongDto: UpdateSongDto) {
     return this.songsService.update(+id, updateSongDto);
   }
 
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.songsService.remove(+id);

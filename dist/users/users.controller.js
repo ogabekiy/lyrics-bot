@@ -19,13 +19,19 @@ const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 const roleGuard_1 = require("../common/guards/roleGuard");
 const roles_decorator_1 = require("../common/guards/roles.decorator");
+const authGuard_1 = require("../common/guards/authGuard");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
     create(createUserDto) {
-        console.log('xa');
+        if (createUserDto.role === 'admin') {
+            throw new common_1.ForbiddenException('admin is only created by super admin');
+        }
         return this.usersService.create(createUserDto);
+    }
+    createAdmin(createUserDto) {
+        return this.usersService.createAdmin(createUserDto);
     }
     findAll() {
         return this.usersService.findAll();
@@ -33,7 +39,16 @@ let UsersController = class UsersController {
     findOne(id) {
         return this.usersService.findOne(+id);
     }
-    update(id, updateUserDto) {
+    update(id, updateUserDto, req) {
+        console.log("req.user.dataValues.role", req.user.dataValues.role);
+        console.log("id", id);
+        console.log("req.user.dataValues.id", req.user.dataValues.id);
+        const isAdmin = req.user && req.user.dataValues.role === 'admin';
+        const isUser = req.user && req.user.dataValues.role === 'user';
+        const isSameUser = id == req.user.dataValues.id;
+        if (!isAdmin && isUser && !isSameUser) {
+            throw new common_1.ForbiddenException("You can't edit others' profile");
+        }
         return this.usersService.update(+id, updateUserDto);
     }
     remove(id) {
@@ -49,6 +64,15 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "create", null);
 __decorate([
+    (0, common_1.UseGuards)(roleGuard_1.RoleGuard),
+    (0, roles_decorator_1.Roles)('admin'),
+    (0, common_1.Post)('createAdmin'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "createAdmin", null);
+__decorate([
     (0, common_1.Get)('all'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -62,11 +86,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findOne", null);
 __decorate([
+    (0, common_1.UseGuards)(authGuard_1.AuthGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
+    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto, Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "update", null);
 __decorate([
