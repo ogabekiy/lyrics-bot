@@ -3,22 +3,26 @@ import { CreateSongDto } from './dto/create-song.dto';
 import { UpdateSongDto } from './dto/update-song.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Song } from './song.model';
+import { Artist } from 'src/artists/artist.model';
+import { Album } from 'src/albums/album.model';
 
 @Injectable()
 export class SongsService {
   constructor(@InjectModel(Song) private SongModel: typeof Song){}
 
   async create(createSongDto: CreateSongDto) {
+    // console.log('song',createSongDto);
+    
     return await this.SongModel.create(createSongDto);
   }
 
   async findAll() {
-    const data = await this.SongModel.findAll({})
+    const data = await this.SongModel.findAll({include:[{model: Artist,attributes:['name']},{model: Album,attributes:['title']}]})
     return data;
   }
 
   async findOne(id: number) {
-    return await this.SongModel.findOne({where:{id}});
+    return await this.SongModel.findOne({where:{id},include:[{model: Artist,attributes:['name']},{model: Album,attributes:['title']}]});
   }
 
   async update(id: number, updateSongDto: UpdateSongDto) {

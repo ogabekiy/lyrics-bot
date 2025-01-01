@@ -60,7 +60,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "profile_image", void 0);
 __decorate([
-    (0, sequelize_typescript_1.HasMany)(() => song_model_1.Song),
+    (0, sequelize_typescript_1.HasMany)(() => song_model_1.Song, { as: 'created_songs' }),
     __metadata("design:type", Array)
 ], User.prototype, "songs", void 0);
 exports.User = User = __decorate([

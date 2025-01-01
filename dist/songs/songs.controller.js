@@ -17,11 +17,14 @@ const common_1 = require("@nestjs/common");
 const songs_service_1 = require("./songs.service");
 const create_song_dto_1 = require("./dto/create-song.dto");
 const update_song_dto_1 = require("./dto/update-song.dto");
+const roleGuard_1 = require("../common/guards/roleGuard");
+const roles_decorator_1 = require("../common/guards/roles.decorator");
 let SongsController = class SongsController {
     constructor(songsService) {
         this.songsService = songsService;
     }
-    create(createSongDto) {
+    create(createSongDto, req) {
+        createSongDto.added_by = req.user.dataValues.id;
         return this.songsService.create(createSongDto);
     }
     findAll() {
@@ -39,10 +42,13 @@ let SongsController = class SongsController {
 };
 exports.SongsController = SongsController;
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.UseGuards)(roleGuard_1.RoleGuard),
+    (0, roles_decorator_1.Roles)('admin'),
+    (0, common_1.Post)('create'),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_song_dto_1.CreateSongDto]),
+    __metadata("design:paramtypes", [create_song_dto_1.CreateSongDto, Object]),
     __metadata("design:returntype", void 0)
 ], SongsController.prototype, "create", null);
 __decorate([

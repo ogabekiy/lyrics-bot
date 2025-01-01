@@ -12,12 +12,13 @@ const songs_service_1 = require("./songs.service");
 const songs_controller_1 = require("./songs.controller");
 const sequelize_1 = require("@nestjs/sequelize");
 const song_model_1 = require("./song.model");
+const users_module_1 = require("../users/users.module");
 let SongsModule = class SongsModule {
 };
 exports.SongsModule = SongsModule;
 exports.SongsModule = SongsModule = __decorate([
     (0, common_1.Module)({
-        imports: [sequelize_1.SequelizeModule.forFeature([song_model_1.Song])],
+        imports: [sequelize_1.SequelizeModule.forFeature([song_model_1.Song]), users_module_1.UsersModule],
         controllers: [songs_controller_1.SongsController],
         providers: [songs_service_1.SongsService],
     })

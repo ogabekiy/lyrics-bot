@@ -4,6 +4,7 @@ import { UpdateAlbumDto } from './dto/update-album.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Album } from './album.model';
 import { Artist } from 'src/artists/artist.model';
+import { Song } from 'src/songs/song.model';
 
 @Injectable()
 export class AlbumsService {
@@ -20,11 +21,11 @@ export class AlbumsService {
   }
 
   async findAll() {
-    return await this.AlbumModel.findAll();
+    return await this.AlbumModel.findAll({include:[{model:Artist,attributes:['name']},{model:Song,attributes:['title']}]});
   }
 
   async findOne(id: number) {
-    return await this.AlbumModel.findOne({where:{id}});
+    return await this.AlbumModel.findOne({where:{id},include:[{model:Artist,attributes:['name']},{model:Song,attributes:['title']}]});
   }
 
   async update(id: number, updateAlbumDto: UpdateAlbumDto) {

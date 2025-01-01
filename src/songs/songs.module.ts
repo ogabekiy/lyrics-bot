@@ -3,10 +3,11 @@ import { SongsService } from './songs.service';
 import { SongsController } from './songs.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Song } from './song.model';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Song])],
+  imports: [SequelizeModule.forFeature([Song]),UsersModule],
   controllers: [SongsController],
   providers: [SongsService],
-})
+})  
 export class SongsModule {}

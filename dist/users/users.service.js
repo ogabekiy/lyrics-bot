@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const sequelize_1 = require("@nestjs/sequelize");
 const user_model_1 = require("./user.model");
 const bcrypt = require("bcryptjs");
+const song_model_1 = require("../songs/song.model");
 let UsersService = class UsersService {
     constructor(UserModel) {
         this.UserModel = UserModel;
@@ -31,7 +32,7 @@ let UsersService = class UsersService {
         return await this.UserModel.create(createUserDto);
     }
     async findAll() {
-        return await this.UserModel.findAll();
+        return await this.UserModel.findAll({ include: [{ model: song_model_1.Song, attributes: ['title'] }] });
         ;
     }
     async findOne(id) {

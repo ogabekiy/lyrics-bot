@@ -41,6 +41,6 @@ export class User extends Model<User>{
     })
     profile_image: string;
 
-    @HasMany(() => Song)
+    @HasMany(() => Song,{as: 'created_songs'})
     songs: Song[]
 }

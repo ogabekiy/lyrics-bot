@@ -11,13 +11,14 @@ const common_1 = require("@nestjs/common");
 const config_service_1 = require("./config/config.service");
 const users_module_1 = require("../users/users.module");
 const authGuard_1 = require("./guards/authGuard");
+const songs_module_1 = require("../songs/songs.module");
 let SharedModule = class SharedModule {
 };
 exports.SharedModule = SharedModule;
 exports.SharedModule = SharedModule = __decorate([
     (0, common_1.Global)(),
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule],
+        imports: [users_module_1.UsersModule, songs_module_1.SongsModule],
         providers: [config_service_1.ConfigService, authGuard_1.AuthGuard],
         exports: [config_service_1.ConfigService]
     })

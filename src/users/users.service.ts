@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './user.model';
 import * as bcrypt from 'bcryptjs';
+import { Song } from 'src/songs/song.model';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User) private UserModel: typeof User) {}
@@ -20,7 +21,7 @@ export class UsersService {
   }
   
   async findAll() {
-    return await this.UserModel.findAll(); ;
+    return await this.UserModel.findAll({include:[{model:Song,attributes:['title']}]}); ;
   }
 
   async findOne(id: number) {
